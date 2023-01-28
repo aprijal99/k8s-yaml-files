@@ -8,8 +8,8 @@ spec:
     - host: ghiyas.com
       http:
         paths:
-          - pathType: Prefix
-            path: /client/get-user/.*
+          - path: /client
+            pathType: Prefix
             backend:
               service:
                 name: client-service
