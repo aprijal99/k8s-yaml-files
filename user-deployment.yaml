@@ -27,7 +27,7 @@ spec:
       labels:
         app: user
     spec:
-      nodeName: kubernetes-working-node-1
+      nodeName: kubernetes-worker-node-1
       containers:
         - name: user-container
           image: aprijalghiyas/user:1.0
