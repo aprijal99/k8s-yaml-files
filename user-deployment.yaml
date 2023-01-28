@@ -28,7 +28,7 @@ spec:
       labels:
         app: user
     spec:
-      nodeName: kubernetes-worker-node-1
+      nodeName: spring-boot-microservices
       containers:
         - name: user-container
           image: aprijalghiyas/user:1.0
