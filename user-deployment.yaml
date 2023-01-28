@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  selector:
+    app: user
+  ports:
+    - port: 80
+      name: user-service-port
+      targetPort: user-port
+      protocol: TCP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      nodeName: kubernetes-working-node-1
+      containers:
+        - name: user-container
+          image: aprijalghiyas/user:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: user-port
