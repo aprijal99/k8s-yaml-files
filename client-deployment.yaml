@@ -52,7 +52,7 @@ spec:
       nodeName: kubernetes-worker-node-1
       containers:
         - name: client-container
-          image: aprijalghiyas/client:1.1
+          image: aprijalghiyas/client:1.2
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
