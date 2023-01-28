@@ -51,10 +51,10 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: ghiyas.com
+    - host: database.ghiyas.com
       http:
         paths:
-          - path: /phpmyadmin
+          - path: /
             pathType: Prefix
             backend:
               service:
