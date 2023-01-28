@@ -9,7 +9,7 @@ spec:
       http:
         paths:
           - pathType: Prefix
-            path: /client/.*
+            path: /client/get-user/.*
             backend:
               service:
                 name: client-service
