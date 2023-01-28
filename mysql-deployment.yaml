@@ -29,7 +29,7 @@ spec:
       labels:
         app: mysql
     spec:
-      nodeName: kubernetes-worker-node-1
+      nodeName: spring-boot-microservices
       containers:
         - name: mysql-container
           image: mysql:latest
