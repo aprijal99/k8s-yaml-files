@@ -34,6 +34,7 @@ kind: Service
 metadata:
   name: phpmyadmin-service
 spec:
+  type: ClusterIP
   selector:
     app: phpmyadmin
   ports:
@@ -54,8 +55,7 @@ spec:
     - host: ghiyas.com
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - pathType: Prefix
             backend:
               service:
                 name: phpmyadmin-service
