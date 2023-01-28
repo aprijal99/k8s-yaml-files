@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: mysql-service
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: mysql
   ports:
@@ -47,23 +47,3 @@ spec:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
             claimName: mysql-pvc
-
----
-
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: mysql-ingress
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: ghiyas.com
-      http:
-        paths:
-          - pathType: Prefix
-            path: /
-            backend:
-              service:
-                name: mysql-service
-                port:
-                  number: 80
