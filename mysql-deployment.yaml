@@ -32,7 +32,7 @@ spec:
       nodeName: spring-boot-microservices
       containers:
         - name: mysql-container
-          image: mysql:latest
+          image: aprijalghiyas/herbalchem-mysql:1.0
           imagePullPolicy: Always
           env:
             - name: MYSQL_ROOT_PASSWORD
