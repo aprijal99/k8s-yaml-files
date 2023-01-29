@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: ghiyas.com
+    - host: phpmyadmin.ghiyas.com
       http:
         paths:
           - path: /
@@ -15,6 +15,9 @@ spec:
                 name: phpmyadmin-service
                 port:
                   number: 80
+    - host: ghiyas.com
+      http:
+        paths:
           - path: /client
             pathType: Prefix
             backend:
