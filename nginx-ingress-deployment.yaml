@@ -15,13 +15,3 @@ spec:
                 name: phpmyadmin-service
                 port:
                   number: 80
-    - host: ghiyas.com
-      http:
-        paths:
-          - path: /client
-            pathType: Prefix
-            backend:
-              service:
-                name: client-service
-                port:
-                  number: 80
