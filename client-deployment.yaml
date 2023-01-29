@@ -10,7 +10,7 @@ spec:
     - port: 80
       name: client-service-port
       targetPort: client-port
-      protocol: TC
+      protocol: TCP
 
 ---
 
