@@ -29,7 +29,7 @@ spec:
       labels:
         app: mysql
     spec:
-      nodeName: k8s-control-plane
+      nodeName: springboot-microservice
       containers:
         - name: mysql-container
           image: aprijalghiyas/herbalchem-mysql:1.0
