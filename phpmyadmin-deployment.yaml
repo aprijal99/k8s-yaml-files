@@ -29,7 +29,7 @@ spec:
       labels:
         app: phpmyadmin
     spec:
-      nodeName: spring-boot-microservices
+      nodeName: k8s-control-plane
       containers:
         - name: phpmyadmin-container
           image: phpmyadmin:latest
