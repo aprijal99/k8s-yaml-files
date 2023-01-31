@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spring-kafka-app-deployment
+  name: kafka-app-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: spring-kafka-app
+      app: kafka-app
   template:
     metadata:
-      name: spring-kafka-app-pod
+      name: kafka-app-pod
       labels:
-        app: spring-kafka-app
+        app: kafka-app
     spec:
       nodeName: control-plane
       containers:
-        - name: spring-kafka-app-container
+        - name: kafka-app-container
           image: aprijalghiyas/spring-kafka-app:1.0
           imagePullPolicy: Always
           ports:
             - containerPort: 10987
-              name: spring-kafka-app-port
+              name: kafka-app-port
