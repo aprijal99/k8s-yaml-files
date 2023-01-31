@@ -1,4 +1,4 @@
-piVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-kafka-app-deployment
@@ -16,7 +16,7 @@ spec:
       nodeName: control-plane
       containers:
         - name: spring-kafka-app-container
-          image: bitnami/kafka:latest
+          image: aprijalghiyas/spring-kafka-app:1.0
           imagePullPolicy: Always
           ports:
             - containerPort: 10987
