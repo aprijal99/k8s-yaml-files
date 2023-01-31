@@ -17,7 +17,7 @@ spec:
       containers:
         - name: kafka-container
           image: bitnami/kafka:latest
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           ports:
             - containerPort: 9092
               name: kafka-internal-port

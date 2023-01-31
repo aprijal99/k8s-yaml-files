@@ -33,7 +33,7 @@ spec:
       containers:
         - name: zookeeper-container
           image: bitnami/zookeeper:latest
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           ports:
             - containerPort: 2181
               name: zookeeper-port
