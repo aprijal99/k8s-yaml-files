@@ -32,3 +32,10 @@ spec:
                 name: auth-server-service
                 port:
                   number: 80
+          - path: /compound-file
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway-service
+                port:
+                  number: 80
