@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-server-service
+spec:
+  type: ClusterIP
+  selector:
+    app: auth-server
+  ports:
+    - port: 80
+      targetPort: auth-server-port
+      name: auth-server-service-port
+      protocol: TCP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-server
+  template:
+    metadata:
+      name: auth-server-pod
+      labels:
+        app: auth-server
+    spec:
+      nodeName: control-plane
+      containers:
+        - name: auth-server-container
+          image: aprijalghiyas/herbalchem-authorization-server:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8921
+              name: auth-server-port
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "kubernetes"
+            - name: CONFIG_SERVER_USERNAME
+              value: "herbalchem"
+            - name: CONFIG_SERVER_PASSWORD
+              value: "herbalchem"
+            - name: CONFIG_SERVER_HOST
+              value: "cf-server-service/config-server"
