@@ -25,3 +25,10 @@ spec:
                 name: cf-server-service
                 port:
                   number: 80
+          - path: /authorization-server
+            pathType: Prefix
+            backend:
+              service:
+                name: auth-server-service
+                port:
+                  number: 80

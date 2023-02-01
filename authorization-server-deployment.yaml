@@ -46,3 +46,7 @@ spec:
               value: "herbalchem"
             - name: CONFIG_SERVER_HOST
               value: "cf-server-service/config-server"
+            - name: ISSUER_HOST
+              value: "auth-server-service"
+            - name: ISSUER_PORT
+              value: "80"
