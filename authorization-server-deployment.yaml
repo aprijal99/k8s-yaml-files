@@ -7,7 +7,7 @@ spec:
   selector:
     app: auth-server
   ports:
-    - port: 80
+    - port: 8921
       targetPort: auth-port
       name: auth-server-service-port
       protocol: TCP
@@ -49,4 +49,4 @@ spec:
             - name: ISSUER_HOST
               value: "auth-server-service/authorization-server"
             - name: ISSUER_PORT
-              value: "80"
+              value: "8921"

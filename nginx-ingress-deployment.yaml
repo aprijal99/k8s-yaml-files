@@ -31,7 +31,7 @@ spec:
               service:
                 name: auth-server-service
                 port:
-                  number: 80
+                  number: 8921
           - path: /
             pathType: Prefix
             backend:

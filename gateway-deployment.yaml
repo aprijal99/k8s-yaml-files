@@ -49,4 +49,4 @@ spec:
             - name: ISSUER_HOST
               value: "auth-server-service/authorization-server"
             - name: ISSUER_PORT
-              value: "80"
+              value: "8921"
