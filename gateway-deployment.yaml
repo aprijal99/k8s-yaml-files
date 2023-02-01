@@ -32,7 +32,7 @@ spec:
       nodeName: control-plane
       containers:
         - name: gateway-container
-          image: aprijalghiyas/herbalchem-gateway:1.0
+          image: aprijalghiyas/herbalchem-gateway:1.1
           imagePullPolicy: Always
           ports:
             - containerPort: 8443
