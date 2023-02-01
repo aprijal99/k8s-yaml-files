@@ -47,6 +47,6 @@ spec:
             - name: CONFIG_SERVER_HOST
               value: "cf-server-service/config-server"
             - name: ISSUER_HOST
-              value: "auth-server-service/authorization-server"
+              value: "auth-server-service"
             - name: ISSUER_PORT
               value: "8921"
