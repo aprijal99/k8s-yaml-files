@@ -15,3 +15,13 @@ spec:
                 name: phpmyadmin-service
                 port:
                   number: 80
+    - host: herbalchem.com
+      http:
+        paths:
+          - path: /config-server
+            pathType: Prefix
+            backend:
+              service:
+                name: cf-server-service
+                port:
+                  number: 80

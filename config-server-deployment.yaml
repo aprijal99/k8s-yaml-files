@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cf-server-service
+spec:
+  type: ClusterIP
+  selector:
+    app: cf-server
+  ports:
+    - port: 80
+      targetPort: cf-server-port
+      name: cf-server-service-port
+      protocol: TCP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cf-server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cf-server
+  template:
+    metadata:
+      name: cf-server-pod
+      labels:
+        app: cf-server
+    spec:
+      nodeName: control-plane
+      containers:
+        - name: cf-server-container
+          image: aprijalghiyas/herbalchem-config-server:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8888
+              name: cf-server-port
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "kubernetes"
