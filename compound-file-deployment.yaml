@@ -46,13 +46,15 @@ spec:
               value: "herbalchem"
             - name: CONFIG_SERVER_HOST
               value: "cf-server-service/config-server"
+            - name: FORWARDED_HOST
+              value: "herbalchem.com"
           volumeMounts:
             - mountPath: /structure
               name: compound-file-storage
-          lifecycle:
-            postStart:
-              exec:
-                command: ["/bin/sh", "-c", "mkdir -p /structure/structure_2d_sdf /structure/structure_3d_sdf"]
+#          lifecycle:
+#            postStart:
+#              exec:
+#                command: ["/bin/sh", "-c", "mkdir -p /structure/structure_2d_sdf /structure/structure_3d_sdf"]
       volumes:
         - name: compound-file-storage
           persistentVolumeClaim:
