@@ -47,8 +47,16 @@ spec:
             - name: CONFIG_SERVER_HOST
               value: "cf-server-service/config-server"
           volumeMounts:
-            - mountPath: /structure
+            - mountPath: /structure/structure_2d_sdf
               name: compound-file-storage
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - "/bin/sh"
+                  - "-c"
+                  - "mkdir /structure/structure_2d_sdf"
+                  - "mkdir /structure/structure_3d_sdf"
       volumes:
         - name: compound-file-storage
           persistentVolumeClaim:
