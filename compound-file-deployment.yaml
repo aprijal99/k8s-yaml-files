@@ -55,8 +55,7 @@ spec:
                 command:
                   - "/bin/sh"
                   - "-c"
-                  - "mkdir /structure/structure_2d_sdf"
-                  - "mkdir /structure/structure_3d_sdf"
+                  - "mkdir /structure/structure_2d_sdf /structure/structure_3d_sdf"
       volumes:
         - name: compound-file-storage
           persistentVolumeClaim:
