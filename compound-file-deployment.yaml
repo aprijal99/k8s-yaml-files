@@ -52,7 +52,7 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "mkdir -p /structure/structure_2d_sdf"]
+                command: ["/bin/sh", "-c", "mkdir -p /structure/structure_2d_sdf /structure/structure_3d_sdf"]
       volumes:
         - name: compound-file-storage
           persistentVolumeClaim:
