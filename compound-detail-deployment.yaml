@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: compound-detail-service
+spec:
+  type: ClusterIP
+  selector:
+    app: compound-detail
+  ports:
+    - port: 80
+      targetPort: comp-det-port
+      name: compound-detail-service-port
+      protocol: TCP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: compound-detail-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: compound-detail
+  template:
+    metadata:
+      name: compound-detail-pod
+      labels:
+        app: compound-detail
+    spec:
+      nodeName: control-plane
+      containers:
+        - name: compound-detail-container
+          image: aprijalghiyas/herbalchem-compound-detail-service:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: comp-det-port
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "kubernetes"
+            - name: CONFIG_SERVER_USERNAME
+              value: "herbalchem"
+            - name: CONFIG_SERVER_PASSWORD
+              value: "herbalchem"
+            - name: CONFIG_SERVER_HOST
+              value: "cf-server-service/config-server"
