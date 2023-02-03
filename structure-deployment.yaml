@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: structure-service
+spec:
+  type: ClusterIP
+  selector:
+    app: structure
+  ports:
+    - port: 80
+      targetPort: structure-port
+      name: structure-service-port
+      protocol: TCP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: structure-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: structure
+  template:
+    metadata:
+      name: structure-pod
+      labels:
+        app: structure
+    spec:
+      nodeName: control-plane
+      containers:
+        - name: structure-container
+          image: aprijalghiyas/herbalchem-structure-service:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: structure-port
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "kubernetes"
+            - name: CONFIG_SERVER_USERNAME
+              value: "herbalchem"
+            - name: CONFIG_SERVER_PASSWORD
+              value: "herbalchem"
+            - name: CONFIG_SERVER_HOST
+              value: "cf-server-service/config-server"
