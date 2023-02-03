@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: name-identifier-service
+spec:
+  type: ClusterIP
+  selector:
+    app: name-identifier
+  ports:
+    - port: 80
+      targetPort: name-iden-port
+      name: name-identifier-service-port
+      protocol: TCP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: name-identifier-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: name-identifier
+  template:
+    metadata:
+      name: name-identifier-pod
+      labels:
+        app: name-identifier
+    spec:
+      nodeName: control-plane
+      containers:
+        - name: name-identifier-container
+          image: aprijalghiyas/herbalchem-name-identifier-service:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: name-iden-port
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "kubernetes"
+            - name: CONFIG_SERVER_USERNAME
+              value: "herbalchem"
+            - name: CONFIG_SERVER_PASSWORD
+              value: "herbalchem"
+            - name: CONFIG_SERVER_HOST
+              value: "cf-server-service/config-server"
