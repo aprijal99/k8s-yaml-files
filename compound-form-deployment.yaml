@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: compound-form-service
+spec:
+  type: ClusterIP
+  selector:
+    app: compound-form
+  ports:
+    - port: 80
+      targetPort: comp-form-port
+      name: compound-form-service-port
+      protocol: TCP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: compound-form-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: compound-form
+  template:
+    metadata:
+      name: compound-form-pod
+      labels:
+        app: compound-form
+    spec:
+      nodeName: control-plane
+      containers:
+        - name: compound-form-container
+          image: aprijalghiyas/herbalchem-compound-form-service:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: comp-form-port
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "kubernetes"
+            - name: CONFIG_SERVER_USERNAME
+              value: "herbalchem"
+            - name: CONFIG_SERVER_PASSWORD
+              value: "herbalchem"
+            - name: CONFIG_SERVER_HOST
+              value: "cf-server-service/config-server"
