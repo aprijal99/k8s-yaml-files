@@ -13,35 +13,35 @@ spec:
 
 ---
 
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: es-data-pv
-spec:
-  storageClassName: es-data
-  capacity:
-    storage: 2Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/elasticsearch/data"
-
----
-
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: es-client-pv
-spec:
-  storageClassName: es-client
-  capacity:
-    storage: 2Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/elasticsearch/client"
-
----
+#apiVersion: v1
+#kind: PersistentVolume
+#metadata:
+#  name: es-data-pv
+#spec:
+#  storageClassName: es-data
+#  capacity:
+#    storage: 2Gi
+#  accessModes:
+#    - ReadWriteOnce
+#  hostPath:
+#    path: "/mnt/elasticsearch/data"
+#
+#---
+#
+#apiVersion: v1
+#kind: PersistentVolume
+#metadata:
+#  name: es-client-pv
+#spec:
+#  storageClassName: es-client
+#  capacity:
+#    storage: 2Gi
+#  accessModes:
+#    - ReadWriteOnce
+#  hostPath:
+#    path: "/mnt/elasticsearch/client"
+#
+#---
 
 apiVersion: elasticsearch.k8s.elastic.co/v1
 kind: Elasticsearch
@@ -53,10 +53,10 @@ spec:
     - name: master
       count: 1
       config:
-        node.master: true
-        node.data: false
-        node.ingest: false
-        xpack.ml.enabled: true
+#        node.master: true
+#        node.data: false
+#        node.ingest: false
+#        xpack.ml.enabled: true
         node.store.allow_mmap: false
       volumeClaimTemplates:
         - metadata:
@@ -68,39 +68,39 @@ spec:
               requests:
                 storage: 2Gi
             storageClassName: es-master
-    - name: data
-      count: 1
-      config:
-        node.master: false
-        node.data: true
-        node.ingest: false
-        xpack.ml.enabled: true
-        node.store.allow_mmap: false
-      volumeClaimTemplates:
-        - metadata:
-            name: elasticsearch-data
-          spec:
-            accessModes:
-              - ReadWriteOnce
-            resources:
-              requests:
-                storage: 2Gi
-            storageClassName: es-data
-    - name: client
-      count: 1
-      config:
-        node.master: false
-        node.data: false
-        node.ingest: true
-        xpack.ml.enabled: true
-        node.store.allow_mmap: false
-      volumeClaimTemplates:
-        - metadata:
-            name: elasticsearch-data
-          spec:
-            accessModes:
-              - ReadWriteOnce
-            resources:
-              requests:
-                storage: 2Gi
-            storageClassName: es-client
+#    - name: data
+#      count: 1
+#      config:
+#        node.master: false
+#        node.data: true
+#        node.ingest: false
+#        xpack.ml.enabled: true
+#        node.store.allow_mmap: false
+#      volumeClaimTemplates:
+#        - metadata:
+#            name: elasticsearch-data
+#          spec:
+#            accessModes:
+#              - ReadWriteOnce
+#            resources:
+#              requests:
+#                storage: 2Gi
+#            storageClassName: es-data
+#    - name: client
+#      count: 1
+#      config:
+#        node.master: false
+#        node.data: false
+#        node.ingest: true
+#        xpack.ml.enabled: true
+#        node.store.allow_mmap: false
+#      volumeClaimTemplates:
+#        - metadata:
+#            name: elasticsearch-data
+#          spec:
+#            accessModes:
+#              - ReadWriteOnce
+#            resources:
+#              requests:
+#                storage: 2Gi
+#            storageClassName: es-client
