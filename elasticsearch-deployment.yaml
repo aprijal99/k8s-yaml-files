@@ -9,7 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/elasticsearch/data"
+    path: "/home/aprijal_99/elasticsearch/data"
 
 ---
 
@@ -59,9 +59,9 @@ spec:
         app: elasticsearch
     spec:
       securityContext:
-        fsGroup: 1001
-        runAsGroup: 1001
-        runAsUser: 1001
+        fsGroup: 1002
+        runAsGroup: 1002
+        runAsUser: 1002
       nodeName: control-plane
       containers:
         - name: elasticsearch-container
