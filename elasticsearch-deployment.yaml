@@ -78,7 +78,29 @@ spec:
           volumeMounts:
             - mountPath: /bitnami/elasticsearch/data
               name: elasticsearch-data-storage
+            - mountPath: /opt/bitnami/elasticsearch/config/my_elasticsearch.yml
+              subPath: my_elasticsearch.yml
+              name: elasticsearch-config
       volumes:
         - name: elasticsearch-data-storage
           persistentVolumeClaim:
             claimName: elasticsearch-pvc
+        - name: elasticsearch-config
+          configMap:
+            name: elasticsearch-configmap
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: elasticsearch-configmap
+data:
+  my_elasticsearch.yml: |
+    http:
+      cors:
+        enabled: true
+        allow-origin: "*"
+        allow-method: OPTIONS, HEAD, GET, POST, PUT, DELETE
+        allow-headers: X-Requested-With,X-Auth-Token,Content-Type,Content-Length
+        allow-credentials: true
