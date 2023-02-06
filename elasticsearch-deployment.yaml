@@ -58,10 +58,6 @@ spec:
       labels:
         app: elasticsearch
     spec:
-      securityContext:
-        fsGroup: 1002
-        runAsGroup: 1002
-        runAsUser: 1002
       nodeName: control-plane
       containers:
         - name: elasticsearch-container
