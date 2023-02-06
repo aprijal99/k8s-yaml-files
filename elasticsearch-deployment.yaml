@@ -9,7 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/elasticsearch"
+    path: "/home/aprijal_99/elasticsearch"
 
 ---
 
