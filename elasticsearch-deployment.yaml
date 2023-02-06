@@ -1,106 +1,84 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: es-master-pv
+  name: elasticsearch-pv
 spec:
-  storageClassName: es-master
+  storageClassName: elasticsearch
   capacity:
-    storage: 2Gi
+    storage: 3Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/elasticsearch/master"
+    path: "/mnt/elasticsearch"
 
 ---
 
-#apiVersion: v1
-#kind: PersistentVolume
-#metadata:
-#  name: es-data-pv
-#spec:
-#  storageClassName: es-data
-#  capacity:
-#    storage: 2Gi
-#  accessModes:
-#    - ReadWriteOnce
-#  hostPath:
-#    path: "/mnt/elasticsearch/data"
-#
-#---
-#
-#apiVersion: v1
-#kind: PersistentVolume
-#metadata:
-#  name: es-client-pv
-#spec:
-#  storageClassName: es-client
-#  capacity:
-#    storage: 2Gi
-#  accessModes:
-#    - ReadWriteOnce
-#  hostPath:
-#    path: "/mnt/elasticsearch/client"
-#
-#---
-
-apiVersion: elasticsearch.k8s.elastic.co/v1
-kind: Elasticsearch
+apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
-  name: herbalchem
+  name: elasticsearch-pvc
 spec:
-  version: 8.6.1
-  nodeSets:
-    - name: master
-      count: 1
-      config:
-#        node.master: true
-#        node.data: false
-#        node.ingest: false
-#        xpack.ml.enabled: true
-        node.store.allow_mmap: false
-      volumeClaimTemplates:
-        - metadata:
-            name: elasticsearch-data
-          spec:
-            accessModes:
-              - ReadWriteOnce
-            resources:
-              requests:
-                storage: 2Gi
-            storageClassName: es-master
-#    - name: data
-#      count: 1
-#      config:
-#        node.master: false
-#        node.data: true
-#        node.ingest: false
-#        xpack.ml.enabled: true
-#        node.store.allow_mmap: false
-#      volumeClaimTemplates:
-#        - metadata:
-#            name: elasticsearch-data
-#          spec:
-#            accessModes:
-#              - ReadWriteOnce
-#            resources:
-#              requests:
-#                storage: 2Gi
-#            storageClassName: es-data
-#    - name: client
-#      count: 1
-#      config:
-#        node.master: false
-#        node.data: false
-#        node.ingest: true
-#        xpack.ml.enabled: true
-#        node.store.allow_mmap: false
-#      volumeClaimTemplates:
-#        - metadata:
-#            name: elasticsearch-data
-#          spec:
-#            accessModes:
-#              - ReadWriteOnce
-#            resources:
-#              requests:
-#                storage: 2Gi
-#            storageClassName: es-client
+  storageClassName: elasticsearch
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch-service
+spec:
+  type: ClusterIP
+  selector:
+    app: elasticsearch
+  ports:
+    - port: 80
+      targetPort: es-port
+      name: elasticsearch-service-port
+      protocol: TCP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      name: elasticsearch-pod
+      labels:
+        app: elasticsearch
+    spec:
+      nodeName: control-plane
+      containers:
+        - name: elasticsearch-container
+          image: bitnami/elasticsearch:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ELASTICSEARCH_CLUSTER_NAME
+              value: "herbalchem-es-cluster"
+            - name: ELASTICSEARCH_NODE_NAME
+              value: "es-node-1"
+            - name: ELASTICSEARCH_PORT_NUMBER
+              value: "9200"
+            - name: ELASTICSEARCH_HEAP_SIZE
+              value: "3072m"
+          ports:
+            - containerPort: 9200
+              name: es-port
+          volumeMounts:
+            - mountPath: /bitnami/elasticsearch/data
+              name: elasticsearch-data-storage
+      volumes:
+        - name: elasticsearch-data-storage
+          persistentVolumeClaim:
+            claimName: elasticsearch-pvc

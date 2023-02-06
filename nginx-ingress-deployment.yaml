@@ -15,6 +15,16 @@ spec:
                 name: phpmyadmin-service
                 port:
                   number: 80
+    - host: elasticsearch.herbalchem.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: elasticsearch-service
+                port:
+                  number: 80
     - host: herbalchem.com
       http:
         paths:
