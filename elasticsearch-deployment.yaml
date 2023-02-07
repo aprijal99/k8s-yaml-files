@@ -61,7 +61,7 @@ spec:
       nodeName: control-plane
       containers:
         - name: elasticsearch-container
-          image: bitnami/elasticsearch:latest
+          image: bitnami/elasticsearch:7.17.7
           imagePullPolicy: IfNotPresent
           env:
             - name: ELASTICSEARCH_CLUSTER_NAME
