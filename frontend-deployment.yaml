@@ -32,7 +32,7 @@ spec:
       nodeName: control-plane
       containers:
         - name: frontend-container
-          image: aprijalghiyas/herbalchem-frontend:1.1
+          image: aprijalghiyas/herbalchem-frontend:1.2
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
