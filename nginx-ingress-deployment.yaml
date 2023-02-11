@@ -15,26 +15,19 @@ spec:
                 name: phpmyadmin-service
                 port:
                   number: 80
-    - host: elasticsearch.herbalchem.site
+#    - host: elasticsearch.herbalchem.site
+#      http:
+#        paths:
+#          - path: /
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: elasticsearch-service
+#                port:
+#                  number: 80
+    - host: www.herbalchem.site
       http:
         paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: elasticsearch-service
-                port:
-                  number: 80
-    - host: herbalchem.site
-      http:
-        paths:
-          - path: /config-server
-            pathType: Prefix
-            backend:
-              service:
-                name: cf-server-service
-                port:
-                  number: 80
           - path: /authorization-server
             pathType: Prefix
             backend:
@@ -46,6 +39,23 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: gateway-service
+                name: frontend-service
+                port:
+                  number: 80
+    - host: herbalchem.site
+      http:
+        paths:
+          - path: /authorization-server
+            pathType: Prefix
+            backend:
+              service:
+                name: auth-server-service
+                port:
+                  number: 8921
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-service
                 port:
                   number: 80
