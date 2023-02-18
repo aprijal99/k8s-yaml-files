@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: services-ingress
   annotations:
+    kubernetes.io/ingress.class: "nginx"
     cert-manager.io/issuer: "letsencrypt-prod"
 spec:
   ingressClassName: nginx
@@ -31,23 +32,23 @@ spec:
 #                name: elasticsearch-service
 #                port:
 #                  number: 80
-    - host: www.herbalchem.site
-      http:
-        paths:
-          - path: /authorization-server
-            pathType: Prefix
-            backend:
-              service:
-                name: auth-server-service
-                port:
-                  number: 8921
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: frontend-service
-                port:
-                  number: 80
+#    - host: www.herbalchem.site
+#      http:
+#        paths:
+#          - path: /authorization-server
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: auth-server-service
+#                port:
+#                  number: 8921
+#          - path: /
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: frontend-service
+#                port:
+#                  number: 80
     - host: herbalchem.site
       http:
         paths:
