@@ -36,9 +36,11 @@ spec:
           imagePullPolicy: Always
           env:
             - name: PMA_HOST
-              value: mysql-service
+              value: "mysql-service"
             - name: PMA_PORT
               value: "80"
+            - name: PMA_ABSOLUTE_URI
+              value: "https://herbalchem.site/phpmyadmin"
           ports:
             - containerPort: 80
               name: phpmyadmin-port
