@@ -4,7 +4,9 @@ metadata:
   name: services-ingress
   annotations:
 #    kubernetes.io/ingress.class: "nginx"
+#    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     cert-manager.io/issuer: "letsencrypt-prod"
+    nginx.org/rewrites: "serviceName=phpmyadmin-service rewrite=/"
 spec:
   ingressClassName: nginx
   tls:
@@ -43,6 +45,13 @@ spec:
                 name: auth-server-service
                 port:
                   number: 8921
+          - path: /compound_summary
+            pathType: Prefix
+            backend:
+              service:
+                name: elasticsearch-service
+                port:
+                  number: 80
           - path: /phpmyadmin
             pathType: Prefix
             backend:
@@ -67,6 +76,13 @@ spec:
                 name: auth-server-service
                 port:
                   number: 8921
+          - path: /compound_summary
+            pathType: Prefix
+            backend:
+              service:
+                name: elasticsearch-service
+                port:
+                  number: 80
           - path: /phpmyadmin
             pathType: Prefix
             backend:
