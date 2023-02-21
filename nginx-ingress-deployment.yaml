@@ -4,9 +4,7 @@ metadata:
   name: services-ingress
   annotations:
 #    kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     cert-manager.io/issuer: "letsencrypt-prod"
-    nginx.org/rewrites: "serviceName=phpmyadmin-service rewrite=/"
 spec:
   ingressClassName: nginx
   tls:
