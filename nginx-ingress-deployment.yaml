@@ -13,29 +13,16 @@ spec:
         - www.herbalchem.site
       secretName: herbalchem.site-tls
   rules:
-#    - host: phpmyadmin.herbalchem.site
-#      http:
-#        paths:
-#          - path: /
-#            pathType: Prefix
-#            backend:
-#              service:
-#                name: phpmyadmin-service
-#                port:
-#                  number: 80
-#    - host: elasticsearch.herbalchem.site
-#      http:
-#        paths:
-#          - path: /
-#            pathType: Prefix
-#            backend:
-#              service:
-#                name: elasticsearch-service
-#                port:
-#                  number: 80
     - host: www.herbalchem.site
       http:
         paths:
+          - path: /compound-detail
+            pathType: Prefix
+            backend:
+              service:
+                name: compound-detail-service
+                port:
+                  number: 80
           - path: /authorization-server
             pathType: Prefix
             backend:
@@ -67,6 +54,13 @@ spec:
     - host: herbalchem.site
       http:
         paths:
+          - path: /compound-detail
+            pathType: Prefix
+            backend:
+              service:
+                name: compound-detail-service
+                port:
+                  number: 80
           - path: /authorization-server
             pathType: Prefix
             backend:
