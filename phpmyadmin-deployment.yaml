@@ -32,7 +32,7 @@ spec:
       nodeName: control-plane
       containers:
         - name: phpmyadmin-container
-          image: phpmyadmin:latest
+          image: aprijalghiyas/herbalchem-phpmyadmin:1.0
           imagePullPolicy: IfNotPresent
           env:
             - name: PMA_HOST
