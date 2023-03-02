@@ -16,11 +16,18 @@ spec:
     - host: www.herbalchem.site
       http:
         paths:
-          - path: /compound-detail
+          - path: /phpmyadmin
             pathType: Prefix
             backend:
               service:
-                name: compound-detail-service
+                name: phpmyadmin-service
+                port:
+                  number: 80
+          - path: /compound_summary
+            pathType: Prefix
+            backend:
+              service:
+                name: elasticsearch-service
                 port:
                   number: 80
           - path: /authorization-server
@@ -30,18 +37,18 @@ spec:
                 name: auth-server-service
                 port:
                   number: 8921
-          - path: /compound_summary
+          - path: /compound-detail
             pathType: Prefix
             backend:
               service:
-                name: elasticsearch-service
+                name: compound-detail-service
                 port:
                   number: 80
-          - path: /phpmyadmin
+          - path: /gateway
             pathType: Prefix
             backend:
               service:
-                name: phpmyadmin-service
+                name: gateway-service
                 port:
                   number: 80
           - path: /
@@ -54,11 +61,18 @@ spec:
     - host: herbalchem.site
       http:
         paths:
-          - path: /compound-detail
+          - path: /phpmyadmin
             pathType: Prefix
             backend:
               service:
-                name: compound-detail-service
+                name: phpmyadmin-service
+                port:
+                  number: 80
+          - path: /compound_summary
+            pathType: Prefix
+            backend:
+              service:
+                name: elasticsearch-service
                 port:
                   number: 80
           - path: /authorization-server
@@ -68,18 +82,18 @@ spec:
                 name: auth-server-service
                 port:
                   number: 8921
-          - path: /compound_summary
+          - path: /compound-detail
             pathType: Prefix
             backend:
               service:
-                name: elasticsearch-service
+                name: compound-detail-service
                 port:
                   number: 80
-          - path: /phpmyadmin
+          - path: /gateway
             pathType: Prefix
             backend:
               service:
-                name: phpmyadmin-service
+                name: gateway-service
                 port:
                   number: 80
           - path: /

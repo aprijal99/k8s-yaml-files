@@ -32,7 +32,7 @@ spec:
       nodeName: control-plane
       containers:
         - name: auth-server-container
-          image: aprijalghiyas/herbalchem-authorization-server:1.2
+          image: aprijalghiyas/herbalchem-authorization-server:1.3
           imagePullPolicy: Always
           ports:
             - containerPort: 8921
