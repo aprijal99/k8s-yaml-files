@@ -52,3 +52,6 @@ spec:
               value: "8921"
             - name: SITE_NAME
               value: "herbalchem.site"
+          resources:
+            limits:
+              memory: 256Mi
