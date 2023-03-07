@@ -32,7 +32,7 @@ spec:
       nodeName: control-plane
       containers:
         - name: compound-file-container
-          image: aprijalghiyas/herbalchem-compound-file-service:1.3
+          image: aprijalghiyas/herbalchem-compound-file-service:1.4
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -46,11 +46,14 @@ spec:
               value: "herbalchem"
             - name: CONFIG_SERVER_HOST
               value: "cf-server-service/config-server"
-#            - name: FORWARDED_HOST
-#              value: "herbalchem.com"
+            - name: FORWARDED_HOST
+              value: "herbalchem.site"
           volumeMounts:
             - mountPath: /structure
               name: compound-file-storage
+          resources:
+            limits:
+              memory: 256Mi
 #          lifecycle:
 #            postStart:
 #              exec:
