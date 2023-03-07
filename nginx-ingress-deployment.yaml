@@ -41,7 +41,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: compound-detail-service
+                name: gateway-service
                 port:
                   number: 80
           - path: /compound-form
@@ -52,13 +52,6 @@ spec:
                 port:
                   number: 80
           - path: /compound-file
-            pathType: Prefix
-            backend:
-              service:
-                name: gateway-service
-                port:
-                  number: 80
-          - path: /compound-detail
             pathType: Prefix
             backend:
               service:
@@ -100,7 +93,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: compound-detail-service
+                name: gateway-service
                 port:
                   number: 80
           - path: /compound-form
@@ -111,13 +104,6 @@ spec:
                 port:
                   number: 80
           - path: /compound-file
-            pathType: Prefix
-            backend:
-              service:
-                name: gateway-service
-                port:
-                  number: 80
-          - path: /compound-detail
             pathType: Prefix
             backend:
               service:
