@@ -58,13 +58,6 @@ spec:
                 name: gateway-service
                 port:
                   number: 80
-          - path: /compound-detail
-            pathType: Prefix
-            backend:
-              service:
-                name: gateway-service
-                port:
-                  number: 80
           - path: /
             pathType: Prefix
             backend:
@@ -111,13 +104,6 @@ spec:
                 port:
                   number: 80
           - path: /compound-file
-            pathType: Prefix
-            backend:
-              service:
-                name: gateway-service
-                port:
-                  number: 80
-          - path: /compound-detail
             pathType: Prefix
             backend:
               service:
