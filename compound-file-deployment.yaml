@@ -46,8 +46,6 @@ spec:
               value: "herbalchem"
             - name: CONFIG_SERVER_HOST
               value: "cf-server-service/config-server"
-            - name: FORWARDED_HOST
-              value: "herbalchem.site"
           volumeMounts:
             - mountPath: /structure
               name: compound-file-storage
