@@ -54,4 +54,4 @@ spec:
               value: "herbalchem.site"
           resources:
             limits:
-              memory: 256Mi
+              memory: 384Mi
